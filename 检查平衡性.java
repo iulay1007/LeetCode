@@ -10,40 +10,32 @@
  */
 class 检查平衡性 {
     int left,right;
+    int left,right;
     public boolean isBalanced(TreeNode root) {
 
-        dfsleft(root.left);
-        dfsright(root.right);
+   if(root==null)
+    return true;
 
-        if(Math.abs(left-right)<=1)
-            return true;
-        return false;
+        left=dfs(root.left,0);
+        right=dfs(root.right,0);
 
-    }
-
-    private int dfsright(TreeNode treeNode) {
-if (treeNode==null)
-    return 0;
-        int count=0,result=0;
-        if(treeNode.left!=null){
-            count++;
-           result+= count+dfsleft(treeNode.left);
-
-        }
-        return result;
+        if(Math.abs(left-right)>1)
+            return false;
+        return isBalanced(root.left)&&isBalanced(root.right);
 
     }
 
-    private int dfsleft(TreeNode treeNode) {
-        if (treeNode==null)
-            return 0;
+    private int dfs(TreeNode root,int dp) {
+        if (root == null)
+            return dp;
 
-        int count=0,result=0;
-        if(treeNode.right!=null){
-            count++;
-            result=count+ dfsleft(treeNode.right);
+        int Left = dfs(root.left, dp + 1);
+        int Right = dfs(root.right, dp + 1);
 
-        }
-        return result;
-    }
-}
+        return Math.max(Left, Right);
+
+
+
+
+    }}
+
