@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * 
+ *
  * 897. 递增顺序查找树
  * 给你一个树，请你 按中序遍历 重新排列树，使树中最左边的结点现在是树的根，并且每个结点没有左子结点，只有一个右子结点。
  *
@@ -18,7 +18,7 @@ import java.util.Stack;
  *     3    6
  *    / \    \
  *   2   4    8
- *  /        / \ 
+ *  /        / \
  * 1        7   9
  *
  * 输出：[1,null,2,null,3,null,4,null,5,null,6,null,7,null,8,null,9]
@@ -39,7 +39,7 @@ import java.util.Stack;
  *               \
  *                8
  *                 \
- *                  9  
+ *                  9
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -48,7 +48,7 @@ import java.util.Stack;
  *     TreeNode(int x) { val = x; }
  * }
  */
-class Solution897 {
+/*class Solution897 {
     TreeNode temp=null;
     public TreeNode increasingBST(TreeNode root) {
         TreeNode ans = new TreeNode(0);
@@ -64,5 +64,36 @@ class Solution897 {
         temp.right = node;
         temp = node;
         helper(node.right);
+    }
+}*/
+//递归！
+class Solution897 {
+    List<TreeNode> list=new ArrayList<>();
+    public TreeNode increasingBST(TreeNode root) {
+        helper(root);
+        TreeNode ans=new TreeNode(0);
+        TreeNode prv=new TreeNode(0);
+        prv=ans;
+        TreeNode temp=new TreeNode(0);
+
+
+        for(int i=0;i<list.size();i++){
+            temp=list.get(i);
+            temp.left=null;
+            prv.right=temp;
+            prv=prv.right;
+
+        }
+        return ans.right;
+
+    }
+
+    private void helper(TreeNode node) {
+        if(node==null)
+            return;
+        helper(node.left);
+        list.add(node);
+        helper(node.right);
+
     }
 }
