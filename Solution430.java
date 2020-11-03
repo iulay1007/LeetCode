@@ -12,7 +12,7 @@ class Node {
     public Node child;
 };
 */
-
+//bug奇奇怪怪。想哭TnT
 class Solution430{
     Node prv=null;
     public Node flatten(Node head){
