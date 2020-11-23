@@ -1,0 +1,86 @@
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution606 {
+    StringBuffer stringBuffer=new StringBuffer();
+    public String tree2str(TreeNode t) {
+        if(t==null)
+            return String.valueOf(stringBuffer);
+        stringBuffer.append(t.val);
+        if(t.left==null&&t.right==null)
+            return String.valueOf(stringBuffer);
+        if(t.left==null)
+        {
+            stringBuffer.append("()");
+        }
+        else {
+            stringBuffer.append("(");
+            tree2str(t.left);
+            stringBuffer.append(")");
+        }
+
+        if(t.right!=null){
+            stringBuffer.append("(");
+            tree2str(t.right);
+            stringBuffer.append(")");
+
+        }
+
+        return String.valueOf(stringBuffer);
+    }
+//用String效率很低
+    String string="";
+    public String tree2str1(TreeNode t) {
+        if(t==null)
+            return string;
+        string=string+t.val;
+
+        if(t.left==null&&t.right==null)
+            return string;
+        if(t.left==null)
+        {
+            string=string+"()";
+        }
+        else {
+           string=string+"(";
+            tree2str(t.left);
+            string=string+")";
+        }
+
+        if(t.right!=null){
+            string=string+"(";
+            tree2str(t.right);
+            string=string+")";
+
+        }
+
+        return string;
+
+
+    }
+}
+
+/**
+ *别人家的递归55555
+ *
+ * public class Solution {
+ *     public String tree2str(TreeNode t) {
+ *         if(t==null)
+ *             return "";
+ *         if(t.left==null && t.right==null)
+ *             return t.val+"";
+ *         if(t.right==null)
+ *             return t.val+"("+tree2str(t.left)+")";
+ *         return t.val+"("+tree2str(t.left)+")("+tree2str(t.right)+")";
+ *     }
+ * }
+ *
+ */
+/
