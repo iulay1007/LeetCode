@@ -44,25 +44,37 @@ class Solution206 {
             return head.next;
         }
     }
-/*错了不想改55困了
-class Solution206m2 {
-    ListNode temp=new ListNode(0);
+/*/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+  ListNode temp=new ListNode(0);
+  ListNode result=new ListNode(0);
     public ListNode reverseList(ListNode head) {
         if(head==null||head.next==null)     return head;
-
-     return    helper(head,head.next);
+        ListNode nnode=head.next;
+        head.next=null;
+    helper(head,nnode);
+     return   result;
 
     }
 
     private ListNode helper(ListNode pnode,ListNode node) {
-        if (pnode==null||node==null) return pnode;
-        if(node.next!=null)
+        if(node==null)
+        result=pnode;
+        if (pnode==null||node==null) return node;
            temp=node.next;
         node.next=pnode;
-        helper(pnode,temp);
-        return pnode;
+        helper(node,temp);
+        return node;
     }
 
+}
 }*/
 
 /*
