@@ -39,3 +39,17 @@ public class Solution1688 {
             }
         }
     }
+    
+    //别人的答案，我是笨蛋。。。
+/*共有n个队伍，一个冠军，需要淘汰n-1个 队伍。
+每一场比赛淘汰一个队伍，因此进行了n-1场比赛。
+所以共有n-1个配对。
+
+
+class Solution {
+    public int numberOfMatches(int n) {
+        return n-1;
+    }
+}
+
+*/
