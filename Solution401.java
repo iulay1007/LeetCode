@@ -9,6 +9,7 @@ import java.util.List;
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 public class Solution401 {
+
     List<String> list=new ArrayList<>();
     public List<String> readBinaryWatch(int num) {
 
@@ -16,70 +17,45 @@ public class Solution401 {
             list.add("0:00");
             return list;
         }
-        backtrackone(num,0,0,0,0);
+        backtrackone(num,0,0,0);
         return list;
     }
 
-    void backtrackone(int num,int min,int sec,int s,int in){
+    void backtrackone(int num,int min,int sec,int s){
         String temp="";
-        int numb=num;
+
         if(num<0)
             return;
-     /*  if(num==0&&min<=11&&s<=59) {
-            temp=min+":"+sec;
-            list.add(temp);
-            return;
-        }*/
-        int nums[]={0,1,2,4,8,1,2,4,8,16,32};
-        for(int i=s;i<=4;i++,in++)
-        {
-            if(s<=4)
-                min=min+nums[in];
-
-            if(i!=0)
-                num--;
-            if(num==0&&min<=11&&sec<=59) {
+        if(num==0&&min<=11&&sec<=59) {
+            if(sec>=0&&sec<10)
+                temp=min+":"+"0"+sec;
+            else
                 temp=min+":"+sec;
-                if(list.contains(temp)==false)
-                    list.add(temp);
-                num=numb;
-                //min=0;
-            }
+            if(list.contains(temp)==false)
+                list.add(temp);
+            return;
+        }
 
-            if(num<0)
-                return;
-            if(i!=0&&s<=4)
-                backtrackone(num,min,0,s+1,in);
-            min=min-nums[in];
-            num++;
-            //  backtracktwo(num,min,sec);
+        int nums[]={1,2,4,8,1,2,4,8,16,32};
+        for(int i=s;i<10;i++)
+        {
+            if(min>11||sec>59)
+                continue;
+
+            if(i<4)
+                min=min+nums[i];
+            else
+                sec=sec+nums[i];
+
+            backtrackone(num-1,min,sec,i+1);
+            if(i<4)
+                min=min-nums[i];
+            else
+                sec=sec-nums[i];
 
         }
 
 
     }
-   /* void backtracktwo(int num,int min,int sec){
-        String temp="";
-        if(num<0)
-        return;
-        if(num==0) {
-            temp=min+":"+sec;
-            list.add(temp);
-            return;
-        }
-        for(int i=0;i<=6;i++)
-        {
-            if(num<=0)
-            return;
-            if(num!=0)
-            sec+= i;
-            if(i!=0)
-            num--;
-            if(num<=0)
-            return;
-            backtracktwo(num,min,sec);
-           
-        }
 
-    }*/
 }
