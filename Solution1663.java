@@ -27,7 +27,7 @@ public class Solution1663 {
         char[] ch = {' ','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
         String result="";
-        //char []char_num=new char[]{'a','a','a'};
+    
         char []char_num=new char[n];
         if(k-n+1<26)
             char_num[n-1]= ch[k-n+1];
@@ -47,12 +47,7 @@ public class Solution1663 {
         }
         for(int j=0;j<i;j++)
             char_num[j]='a';
-   /* for(int j=0;j<n;j++)
-    {
-        System.out.println(char_num[j]);
-        result+=char_num[j];
-    }*/
-        System.out.println(result);
+   
         return new String(char_num);
     }
 
