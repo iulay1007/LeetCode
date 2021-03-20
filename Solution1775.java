@@ -32,8 +32,7 @@ import java.util.Arrays;
  */
 public class Solution1775 {
     public int minOperations(int[] nums1, int[] nums2) {
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
+
         int sum1=0;
         int sum2=0;
         int sum3=0;
@@ -64,6 +63,8 @@ public class Solution1775 {
         Arrays.sort(num);
         for(int j=num.length-1;j>=0;j--)
         {
+            if(num[j]==0)
+                break;
             abs-=num[j];
             step++;
             if(abs<=0)
