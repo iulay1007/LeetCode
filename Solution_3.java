@@ -1,4 +1,7 @@
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 /*3. 无重复字符的最长子串
 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
 
@@ -45,7 +48,60 @@ public class Solution_3 {
         }
         return max;
     }
+    public int lengthOfLongestSubstring2(String s) {
+            if(s.length()==1)
+                return 1;
+            int j=0;
+            int max=0;
+            String str="";
+            int length=s.length();
+            for(int i=0;i<length;i++) {
+                for (; j < length; j++) {
+                    if(!str.contains(s.charAt(j) + ""))
+                        str+=s.charAt(j);
+                    else {
+                        str=str.substring(1,str.length());
+                        max=Math.max(max,str.length()+1);
+                        System.out.println(str);
+                        break;
+                    }
+
+                }
+                max=Math.max(max,str.length());
+            }
+            return max;}
+
+
+    public int lengthOfLongestSubstring3(String s) {
+        if(s.length()==1)
+            return 1;
+        int j=0;
+        int max=0;
+        String str="";
+        int count=0;
+        Set<Character> temp = new HashSet<Character>();
+        int length=s.length();
+        for(int i=0;i<length;i++) {
+            for (; j < length; j++) {
+                if(!temp.contains(s.charAt(j)))
+                {temp.add(s.charAt(j));
+                count++;
+                }
+                else {
+                    count--;
+                    temp.remove(s.charAt(i));
+                    max=Math.max(max,count+1);
+                    System.out.println(str);
+                    break;
+                }
+
+            }
+            max=Math.max(max,count);
+        }
+        return max;}
 }
+
+
 
 /*滑动窗口
 思路和算法
