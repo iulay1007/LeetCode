@@ -1,3 +1,4 @@
+package 剑指offer;
 
 /*
 430. 扁平化多级双向链表
@@ -14,6 +15,12 @@ class Node {
 */
 //bug奇奇怪怪。想哭TnT
 class Solution430{
+    class Node {
+        public int val;
+        public Node prev;
+        public Node next;
+        public Node child;
+    }
     Node prv=null;
     public Node flatten(Node head){
         if (head==null)
