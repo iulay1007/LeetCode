@@ -5,15 +5,8 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-/**
- * 剑指 Offer II 045. 二叉树最底层最左边的值
- 给定一个二叉树的 根节点 root，请找出该二叉树的 最底层 最左边 节点的值。
-
- 假设二叉树中至少有一个节点。
-
- */
-public class OfferII45 {
-     class TreeNode {
+public class OfferII044 {
+    class TreeNode {
       int val;
       TreeNode left;
       TreeNode right;
@@ -25,22 +18,28 @@ public class OfferII45 {
           this.right = right;
       }
   }
-    public int findBottomLeftValue(TreeNode root) {
+    public List<Integer> largestValues(TreeNode root) {
+        if(root == null)
+            return new ArrayList<>();
         Deque<TreeNode> deque = new ArrayDeque<>();
+        List<Integer> list = new ArrayList<>();
         deque.add(root);
-        int res = root.val;
         while (!deque.isEmpty()){
             int size = deque.size();
+            int max = Integer.MIN_VALUE;
             for(int i = 0 ;i<size;i++){
                 TreeNode node = deque.pop();
-                if(i == 0 )
-                    res = node.val;
-                if(node.left!=null)
+                max = Math.max(max,node.val);
+                if(node.left!=null){
                     deque.add(node.left);
-                if(node.right!=null)
+                }
+                if(node.right!=null){
                     deque.add(node.right);
+                }
             }
+            list.add(max);
         }
-        return res;
+        return list;
     }
+
 }
