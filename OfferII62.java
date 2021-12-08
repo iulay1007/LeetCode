@@ -52,15 +52,13 @@ public class OfferII62 {
         public void insert(String word) {
             TreeNode []node = tree;
             for(int i = 0;i<word.length();i++){
-                    if(node[word.charAt(i)-'a']!=null){
-                        node = node[word.charAt(i)-'a'].treeNodes;
-                    }else {
-                        node[word.charAt(i)-'a'] = new TreeNode();
-                        node[word.charAt(i)-'a'].ch = word.charAt(i);
-                        node[word.charAt(i)-'a'].treeNodes = new TreeNode[26];
-                        node = node[word.charAt(i)-'a'].treeNodes;
-                    }
+                if (node[word.charAt(i) - 'a'] == null) {
+                    node[word.charAt(i) - 'a'] = new TreeNode();
+                    node[word.charAt(i) - 'a'].ch = word.charAt(i);
+                    node[word.charAt(i) - 'a'].treeNodes = new TreeNode[26];
                 }
+                node = node[word.charAt(i)-'a'].treeNodes;
+            }
             set.add(word);
 
             }
