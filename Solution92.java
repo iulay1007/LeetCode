@@ -1,63 +1,69 @@
+package 剑指offer;
 
 /**
  * 92. 反转链表 II
- * 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
- *
- * 说明:
- * 1 ≤ m ≤ n ≤ 链表长度。
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
+ * 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
+ * <p>
+ * <p>
+ * 示例 1：
+ * <p>
+ * <p>
+ * 输入：head = [1,2,3,4,5], left = 2, right = 4
+ * 输出：[1,4,3,2,5]
+ * 示例 2：
+ * <p>
+ * 输入：head = [5], left = 1, right = 1
+ * 输出：[5]
  */
 public class Solution92 {
-    ListNode head1,cur,endNext,p;
 
-    public ListNode reverseBetween(ListNode head, int m, int n) {
+    class ListNode {
+        int val;
+        ListNode next;
 
-        ListNode prev=new ListNode(0);
-        prev.next=head;
-
-
-
-
-
-        for(int i = 0; i < m - 1; i++)
-        {
-            prev = prev.next;
+        ListNode() {
         }
-        p=prev;
 
-        ListNode begin = prev.next;
-
-        for(int j = 0; j <= n - m; j++)
-        {
-            prev=prev.next;
+        ListNode(int val) {
+            this.val = val;
         }
-        endNext = prev.next;
 
-        cur=prev.next;
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
 
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+                if(left == right) return head;
+                ListNode fast ,slow;
+                ListNode pre = new ListNode(0);
+                pre.next = head;
+                fast = pre;
+                slow=pre;
+                int count = 0;
+                while (fast!=null&&count!=right){
+                    fast=fast.next;
+                    count++;
+                }
+                count=0;
+                while (slow!=null&&count+1!=left){
+                    slow=slow.next;
+                    count++;
+                }
+                ListNode cur = slow.next;
+                ListNode next = cur.next;
+                cur.next = fast.next;
+                while (cur!=null&&next!=fast.next&&cur!=fast){
+                    ListNode temp =next;
+                    next = temp.next;
+                    temp.next = cur;
+                    cur =temp;
+                }
+                slow.next = cur;
+                if(left==1)
+                    return cur;
+                return head;
+            }
 
-        head1= reverseList(head,prev);
-        p.next=head1;
-        begin.next = endNext;
-
-
-
-        return head;
-
+        }
     }
-
-    public ListNode reverseList(ListNode head,ListNode tail) {
-        if(head == tail)
-            return head;
-
-        ListNode cur = reverseList(head.next, tail);
-        head.next.next = head;
-        return cur;
-
-    }
-}
